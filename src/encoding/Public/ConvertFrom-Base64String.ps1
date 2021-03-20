@@ -12,7 +12,8 @@ function ConvertFrom-Base64String {
   [CmdletBinding()]
   [OutputType([string])]
   param(
-    [Parameter(Mandatory)]
+    [Parameter(Mandatory,
+      HelpMessage = "base64 encoded string value.")]
     [string]$Base64String
   )
 

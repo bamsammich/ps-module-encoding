@@ -1,23 +1,24 @@
 function ConvertTo-Base64String {
   <#
   .Synopsis
-  ConvertFrom-Base64String decodes a base64-encoded string.
+  ConvertTo-Base64String encodes a string to its base64 value.
 
   .Description
-  ConvertFrom-Base64String decodes a base64-encoded string.
+  ConvertTo-Base64String encodes a string to its base64 value.
 
   .Example
-  ConvertFrom-Base64String -Base64String cwB0AHIAaQBuAGcA
+  ConvertTo-Base64String -Base64String random
 #>
   [CmdletBinding()]
   [OutputType([string])]
   param(
-    [Parameter(Mandatory)]
-    [string]$Text
+    [Parameter(Mandatory,
+      HelpMessage = "Raw string value to encode.")]
+    [string]$String
   )
 
   process {
-    $bytes = [System.Text.Encoding]::Unicode.GetBytes($Text)
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($String)
     return [System.Convert]::ToBase64String($bytes)
   }
 }

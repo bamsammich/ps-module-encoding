@@ -9,7 +9,7 @@ Describe 'Module Tests' -Tag Unit {
   Context "Module Tests" {
     $script:manifestEval = $null
     It 'Passes Test-ModuleManifest' {
-      { $script:manifestEval = Test-ModuleManifest -Path $PathToManifest } | Should -Not -Throw
+      { $script:manifestEval = Test-ModuleManifest -Path $PathToManifest } | Should -Not -BeNullOrEmpty
       $? | Should -Be $true
     }#manifestTest
     It 'root module encoding.psm1 should exist' {
@@ -20,6 +20,7 @@ Describe 'Module Tests' -Tag Unit {
       $PathToManifest |
       Should -FileContentMatchExactly "encoding.psm1"
     }#validPSM1
+    $script:manifestEval = Test-ModuleManifest -Path $PathToManifest
     It 'should have a matching module name in the manifest' {
       $script:manifestEval.Name | Should -Be $ModuleName
     }#name
@@ -33,7 +34,7 @@ Describe 'Module Tests' -Tag Unit {
       $script:manifestEval.Version -as [Version] | Should -Not -BeNullOrEmpty
     }#version
     It 'should have a valid guid in the manifest' {
-      { [guid]::Parse($script:manifestEval.Guid) } | Should -Not throw
+      { [guid]::Parse($script:manifestEval.Guid) } | Should -Not -Throw
     }#guid
     It 'should not have any spaces in the tags' {
       foreach ($tag in $script:manifestEval.Tags) {

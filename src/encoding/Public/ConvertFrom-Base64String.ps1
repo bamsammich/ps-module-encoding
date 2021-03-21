@@ -13,7 +13,8 @@ function ConvertFrom-Base64String {
   [OutputType([string])]
   param(
     [Parameter(Mandatory,
-      HelpMessage = "base64 encoded string value.")]
+      HelpMessage = "base64 encoded string value.",
+      ValueFromPipeline)]
     [string]$Base64String
   )
 
